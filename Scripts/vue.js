@@ -11,37 +11,23 @@ Vue.createApp({
     methods: {
         getInfo(table) {
             // Aca se decodifica el archivo con la info de los alumnos
-            this.columns = table;
+            this.columns = table.shift();
             this.rows = table;
-            console.log(table);
         },
         upload() {
-            console.log("Entró")
             var fileUpload = document.getElementById("fileRespuestas");
-            console.log(fileUpload.value)
-            console.log("Empezó")
-            var table = { values: [] };
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var rows = e.target.result.split("\n");
-                for (var i = 0; i < rows.length; i++) {
-                    var cells = rows[i].split(",");
-                    if (cells.length > 1) {
-                        // Insertamos una fila vacía
-                        var row = [];
-                        for (var j = 0; j < cells.length; j++) {
-                            row.push(cells[j]);
-                        }
-                        table.values.push(row)
-                    }
-                }
-            }
-            reader.readAsText(fileUpload.files[0]);
+            const reader = new FileReader();
+            var rawData;
+            reader.addEventListener('load', (event) => {
+                rawData = event.target.result;
+                console.log("rawData", rawData);
+                //this.columns = table.values.targe;
+                var table = Papa.parse(rawData);
+                console.log(table);
+                this.getInfo(table.data)
 
-            //this.columns = table.values.targe;
-            this.rows = table.values;
-            this.rows = this.rows;
-            console.log(this.rows);
+            });
+            reader.readAsText(fileUpload.files[0]);
 
         },
         getWitghts() {

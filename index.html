@@ -15,7 +15,7 @@
 
     <div id="app">
         <div style="background-color: #C9E4CA;">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #364958;">
+            <nav class="navbar navbar-expand-lg navbar-light container-fluid" style="background-color: #364958;">
                 <div class="container-fluid text-center">
                     <div>
                         <a class="navbar-brand mb-1" href="#">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="row text-center py-4 justify-content-evenly" style="background-color: #55828B;">
+            <div class="row container-fluid text-center py-4 justify-content-evenly" style="background-color: #55828B;">
                 <div class="col-3">
                     <label for="fileRespuestas" class="form-label text-light"><i
                             class="fa-solid fa-upload px-2 text-light"></i>Importar respuestas</label>
@@ -47,10 +47,11 @@
                 </div>
             </div>
 
-            <div>
+            <div class="container-fluid">
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col"> Nro</th>
                             <th scope="col" v-for="column in columns">{{ column }}</th>
                         </tr>
                     </thead>
@@ -64,6 +65,10 @@
             </div>
         </div>
     </div>
+
+    <!-- CSV parser -->
+    <script src="Scripts/papaparse.js"></script>
+
     <!-- Vue framework -->
     <script src="Scripts/vue.global.js"></script>
 
