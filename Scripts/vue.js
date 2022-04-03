@@ -20,18 +20,28 @@ Vue.createApp({
             var rawData;
             reader.addEventListener('load', (event) => {
                 rawData = event.target.result;
-                console.log("rawData", rawData);
+                // console.log("rawData", rawData);
                 //this.columns = table.values.targe;
                 var table = Papa.parse(rawData);
-                console.log(table);
                 this.getInfo(table.data)
+                // this.exportFilterTemplate(table.data)
 
             });
             reader.readAsText(fileUpload.files[0]);
 
         },
-        getWitghts() {
+        getWeights() {
             // Aca se decodifica el archivo con los pesos de la formula
+            var fileUpload = document.getElementById("filePesos")
+            const reader = new FileReader();
+            var rawData;
+            reader.addEventListener('load', (event) => {
+                rawData = event.target.result;
+                var table = Papa.parse(rawData,{header: false});
+                console.log(table)
+            });
+            reader.readAsText(fileUpload.files[0]);
+
         },
         calculate() {
             // Aca se calculan las posiciones de los alumnos y settea las variables globales
@@ -40,6 +50,28 @@ Vue.createApp({
         },
         exportTable() {
             // Aca se exporta el archivo actual
+        },
+        exportFilterTemplate(data) {
+            
+            var filters = [];
+
+            this.columns.forEach(element => {
+                if(element === "") return;
+
+                filters.push(element);
+                filters.push("");
+            });
+
+            var parsedFilters = Papa.unparse([filters])
+            const blob = new Blob([parsedFilters], {type: "text/csv"})
+            const url = window.URL.createObjectURL(blob)
+            var link = document.createElement("a");
+            link.setAttribute("href",url);
+            link.setAttribute("download","filtros.csv")
+            document.body.appendChild(link)
+
+            link.click();
         }
+        
     }
 }).mount('#app')
