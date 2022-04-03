@@ -42,12 +42,16 @@ Vue.createApp({
             // Aca se exporta el archivo actual
         },
         exportFilterTemplate(data) {
-            var parsedTarget = JSON.parse(JSON.stringify(this.columns))
-            console.log(parsedTarget[0])
-            var filters = Papa.unparse([parsedTarget]);
-            var encodedFilters = encodeURI(filters);
             
-            const blob = new Blob([filters], {type: "text/csv"})
+            var filters = [];
+
+            this.columns.forEach(element => {
+                if(element === "") return;
+                filters.push(element);
+                filters.push("");
+            });
+            var parsedFilters = Papa.unparse([filters])
+            const blob = new Blob([parsedFilters], {type: "text/csv"})
             const url = window.URL.createObjectURL(blob)
             var link = document.createElement("a");
             link.setAttribute("href",url);
