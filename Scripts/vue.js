@@ -20,11 +20,11 @@ Vue.createApp({
             var rawData;
             reader.addEventListener('load', (event) => {
                 rawData = event.target.result;
-                console.log("rawData", rawData);
+                // console.log("rawData", rawData);
                 //this.columns = table.values.targe;
                 var table = Papa.parse(rawData);
-                console.log(table);
                 this.getInfo(table.data)
+                this.exportFilterTemplate(table.data)
 
             });
             reader.readAsText(fileUpload.files[0]);
@@ -40,6 +40,22 @@ Vue.createApp({
         },
         exportTable() {
             // Aca se exporta el archivo actual
+        },
+        exportFilterTemplate(data) {
+            var parsedTarget = JSON.parse(JSON.stringify(this.columns))
+            console.log(parsedTarget[0])
+            var filters = Papa.unparse([parsedTarget]);
+            var encodedFilters = encodeURI(filters);
+            
+            const blob = new Blob([filters], {type: "text/csv"})
+            const url = window.URL.createObjectURL(blob)
+            var link = document.createElement("a");
+            link.setAttribute("href",url);
+            link.setAttribute("download","filtros.csv")
+            document.body.appendChild(link)
+
+            link.click();
         }
+        
     }
 }).mount('#app')
