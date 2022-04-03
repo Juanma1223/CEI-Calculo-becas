@@ -24,7 +24,7 @@ Vue.createApp({
                 //this.columns = table.values.targe;
                 var table = Papa.parse(rawData);
                 this.getInfo(table.data)
-                this.exportFilterTemplate(table.data)
+                // this.exportFilterTemplate(table.data)
 
             });
             reader.readAsText(fileUpload.files[0]);
@@ -37,7 +37,7 @@ Vue.createApp({
             var rawData;
             reader.addEventListener('load', (event) => {
                 rawData = event.target.result;
-                var table = Papa.parse(rawData);
+                var table = Papa.parse(rawData,{header: true});
                 console.log(table)
             });
             reader.readAsText(fileUpload.files[0]);
