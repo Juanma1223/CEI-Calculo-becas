@@ -37,7 +37,7 @@ Vue.createApp({
             var rawData;
             reader.addEventListener('load', (event) => {
                 rawData = event.target.result;
-                var table = Papa.parse(rawData,{header: true});
+                var table = Papa.parse(rawData,{header: false});
                 console.log(table)
             });
             reader.readAsText(fileUpload.files[0]);
