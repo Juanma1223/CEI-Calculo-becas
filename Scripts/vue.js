@@ -71,8 +71,7 @@ Vue.createApp({
             student.forEach(((answer,index) => {
                 var wRow = 0;
                 var wCol = 2 * index;
-                // debugger;
-                
+
                 var filterAns = weights[wRow][wCol];
                 //perdoname harpo
                 while (filterAns !== undefined && filterAns !== "" && filterAns !== "-") {
