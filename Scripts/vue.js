@@ -81,7 +81,10 @@ Vue.createApp({
             student.forEach(((answer,index) => {
                 var wRow = 0;
                 var wCol = 2 * index;
-
+                
+                //si la tabla de pesos esta vacia, retorno
+                if (weights.length < 1) return 0;
+                
                 var filterAns = weights[wRow][wCol];
                 //perdoname harpo
                 while (filterAns !== undefined && filterAns !== "" && filterAns !== "-") {
