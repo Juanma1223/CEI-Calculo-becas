@@ -2,7 +2,8 @@ Vue.createApp({
     data() {
         return {
             columns: ['Posicion', 'Alumno', 'Necesita plata?', 'Necesita sacar materias?', 'Se quiere morir?'],
-            rows: [['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI']]
+            rows: [['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI'], ['Juanma', 'SI', 'SI', 'SI']],
+            uploaded: false,
         }
     },
     computed: {
@@ -24,6 +25,7 @@ Vue.createApp({
                 //this.columns = table.values.targe;
                 var table = Papa.parse(rawData);
                 this.getInfo(table.data)
+                this.uploaded = true;
                 // this.exportFilterTemplate(table.data)
 
             });
@@ -100,7 +102,7 @@ Vue.createApp({
             console.log(name,weight);
             return weight;
         },
-        exportFilterTemplate(data) {
+        exportFilterTemplate() {
             
             var filters = [];
 
