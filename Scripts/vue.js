@@ -52,11 +52,21 @@ Vue.createApp({
         },
         calculate(weights) {
             //elimino header de la tabla
+            var sortedStudens = [];
             weights.shift();
             //itero sobre cada estudiante para calcular su peso
             this.rows.forEach((row,index) => {
-                this.getStudentWeight(row, weights)
+                sortedStudens.push(
+                    {
+                        answers: row,
+                        weight: this.getStudentWeight(row, weights)
+                    }
+                ) 
             })
+            sortedStudens.sort((a,b)=> {return b.weight - a.weight})
+
+            // console.log(sortedStudens);
+            this.rows = sortedStudens.map((student)=>{return student.answers});
         },
         exportTable() {
             // Aca se exporta el archivo actual
@@ -87,6 +97,7 @@ Vue.createApp({
             }))
             var name = student[1];
             console.log(name,weight);
+            return weight;
         },
         exportFilterTemplate() {
             
