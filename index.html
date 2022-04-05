@@ -34,16 +34,45 @@
                     </div>
                 </div>
             </nav>
-            <div class="row container-fluid text-center py-4 justify-content-evenly" style="background-color: #55828B;">
+            <div class="row container-fluid text-center py-4 justify-content-center" style="background-color: #55828B;">
                 <div class="col-3">
                     <label for="fileRespuestas" class="form-label text-light"><i
                             class="fa-solid fa-upload px-2 text-light"></i>Importar respuestas</label>
                     <input class="form-control" type="file" id="fileRespuestas" @change="upload">
                 </div>
-                <div class="col-3">
+                <div class="col-3 mx-5 text-center" v-if="uploaded">
                     <label for="formFile" class="form-label text-light"><i
                             class="fa-solid fa-upload px-2 text-light"></i>Importar ponderaciones</label>
-                    <input class="form-control" type="file" id="filePesos" @change="getWeights">
+                    <!-- <input class="form-control" type="file" id="filePesos" @change="getWeights"> -->
+                    <button type="button" class="btn btn-light px-4" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-gear px-2"></i>Configurar ponderaciones
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Configurar ponderaciones</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Descargue la plantilla y rellenela con las ponderaciones para cada respuesta</p>
+                            <button type="button" class="btn btn-primary px-4 col-12 mb-3" @click="exportFilterTemplate()">
+                                <i class="fa-solid fa-download px-2"></i>Descargar plantilla
+                            </button>
+                            <label for="formFile" class="form-label text-dark text-center"><i
+                                    class="fa-solid fa-upload px-2 text-dark"></i>Importar ponderaciones</label>
+                            <input class="form-control" type="file" id="filePesos" @change="getWeights">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -64,15 +93,24 @@
                 </table>
             </div>
         </div>
-    </div>
 
-    <!-- CSV parser -->
-    <script src="Scripts/papaparse.js"></script>
+        <!-- CSV parser -->
+        <script src="Scripts/papaparse.js"></script>
 
-    <!-- Vue framework -->
-    <script src="Scripts/vue.global.js"></script>
+        <!-- Vue framework -->
+        <script src="Scripts/vue.global.js"></script>
 
-    <script src="Scripts/vue.js"></script>
+        <script src="Scripts/vue.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
