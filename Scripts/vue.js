@@ -92,9 +92,12 @@ Vue.createApp({
                 while (filterAns !== undefined && filterAns !== "" && filterAns !== "-") {
                     if (answer === filterAns) {
                         weight += parseInt(weights[wRow][wCol + 1]);
+                        break;
                     }
 
                     wRow += 1;
+                    if(weights[wRow] === undefined) break;
+                    
                     filterAns = weights[wRow][wCol];
                 }
             }))
