@@ -29,7 +29,7 @@
                         </button>
                     </div>
                     <div class="">
-                        <button type="button" class="btn text-light mx-1" style="background-color: #55828B;"><i
+                        <button type="button" class="btn text-light mx-1" style="background-color: #55828B;" @click="exportFile"><i
                                 class="fa-solid fa-download px-1"></i>Exportar</button>
                     </div>
                 </div>
@@ -60,17 +60,19 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <p class="text-center">Descargue la plantilla y rellenela con las ponderaciones para cada respuesta</p>
-                            <button type="button" class="btn btn-primary px-4 col-12 mb-3" @click="exportFilterTemplate()">
+                        <div class="modal-body text-center">
+                            <p class="text-center">Descargá la plantilla y rellenala con las respuestas y sus
+                                ponderaciones</p>
+                            <button type="button" class="btn text-light px-4 col-12 mb-3"
+                                style="background-color: #55828B;" @click="exportFilterTemplate()">
                                 <i class="fa-solid fa-download px-2"></i>Descargar plantilla
                             </button>
+                            <hr>
                             <label for="formFile" class="form-label text-dark text-center"><i
                                     class="fa-solid fa-upload px-2 text-dark"></i>Importar ponderaciones</label>
                             <input class="form-control" type="file" id="filePesos" @change="getWeights()">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <p class="mt-4" style="color: #55828B;">Una vez importado el archivo, la tabla se ordena de
+                                mayor a menor puntuación</p>
                         </div>
                     </div>
                 </div>
